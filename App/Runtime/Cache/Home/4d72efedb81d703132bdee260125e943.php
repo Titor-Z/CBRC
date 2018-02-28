@@ -1,0 +1,97 @@
+<?php if (!defined('THINK_PATH')) exit();?><html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>医生登陆</title>
+    <link rel="stylesheet" href="/Public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Public/lib/layui/css/layui.css">
+    <style>
+        .custom-control label::selection{
+            background: none;
+        }
+        .logo {
+            margin-top: 6rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .logo img {
+            width: 8rem;
+            height: 8rem;
+            text-align: center;
+        }
+        .center-block {
+            -webkit-border-radius: 8px;
+            -moz-border-radius: 8px;
+            border-radius: 8px;
+            box-shadow: 0 0 8px 1px #e0e0e2;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <picture class="col-12 logo">
+            <img src="/Public/images/logo.jpg" alt="logo">
+        </picture>
+    </div>
+    <div class="row">
+        <form class="offset-4 border col-4 p-5 center-block" action="<?php echo ($action); ?>" method="post">
+            <h1 class="h4 text-center mb-4">医生登陆</h1>
+            <div class="form-group">
+                <label class="sr-only" for="username">登录名</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="请输入登录名" required>
+                <small id="emailHelp" class="form-text text-muted">请使用已经注册的手机号码或邮箱账号进行登陆</small>
+            </div>
+            <div class="form-group">
+                <label class="sr-only" for="password">密码</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码">
+            </div>
+            <div class="form-group custom-control custom-checkbox" style="">
+                <input type="checkbox" class="custom-control-input" id="customCheck1">
+                <label class="custom-control-label" for="customCheck1">3天内免登陆</label>
+            </div>
+            <button class="btn btn-primary" type="button" name="submit">登陆</button>
+        </form>
+    </div>
+</div>
+
+<script src="/Public/script/jquery.min.js"></script>
+<script src="/Public/lib/layui/layui.js"></script>
+<script src="/Public/script/public.js"></script>
+<!--<script src="/Public/script/login.js"></script>-->
+<!--<script src="/Public/lib/layui/lay/modules/layer.js"></script>-->
+<script>
+    (function () {
+        layui.use(['layer'], function(){
+            var layer = layui.layer;
+        });
+
+        var form = $("form"),
+            action = form.attr('action'),
+            btn = form.find('[name=submit]');
+
+        btn.click(function () {
+            var username = form.find("[name='username']"),
+                password = form.find("[name='password']");
+
+            var data = removeArrNull({
+                username: valSet(username),
+                password: valSet(password)
+            });
+            // console.log(data);
+
+            $.post(action, {data:data}, function (res) {
+                if (res.state=='login') {
+                    layer.msg(res.message,{time: 5000}, function () {
+                        window.location.href = res.target;
+                    });
+                }
+                layer.msg(res, {time: 2000});
+            });
+        });
+    })();
+</script>
+</body>
+</html>

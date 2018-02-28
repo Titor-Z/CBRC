@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>{$page_title}</title>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+
+    <link href="__PUBLIC__/images/logo.ico" rel="shortcut icon" type="image/x-icon">
+    <link href="__PUBLIC__/css/font.css" rel="stylesheet">
+    <link href="__PUBLIC__/css/xadmin.css" rel="stylesheet">
+    <style>
+        input[type='checkbox'] {
+            height: 20px;
+            width: 20px;
+        }
+        .hidden{display: none;}
+    </style>
+</head>
+
+<body>
+<div class="x-nav">
+      <span class="layui-breadcrumb">
+          <a href="">首页</a>
+          <a href="">演示</a>
+          <a><cite>导航元素</cite></a>
+      </span>
+    <a id="reload" class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:30px">ဂ</i>
+    </a>
+</div>
+<div class="x-body">
+    <div class="layui-row">
+        <form class="layui-form layui-col-md12 x-so">
+            <input class="layui-input" placeholder="开始日" name="start" id="start">
+            <input class="layui-input" placeholder="截止日" name="end" id="end">
+            <input type="text" name="username" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+            <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+        </form>
+    </div>
+    <xblock>
+        <button class="layui-btn layui-btn-danger" data-btn="deleteAll" data-action="{$disable_admin_href}">
+            <i class="layui-icon"></i>批量删除
+        </button>
+        <button class="layui-btn" onclick="x_admin_show('{$add_admin_page_title}','{$add_admin_page_href}',600,300)">
+            <i class="layui-icon"></i>添加
+        </button>
+        <span id="countItem" class="x-right" style="line-height:40px">共有数据：<i><?php echo count($result)?></i>条</span>
+    </xblock>
+    <table class="layui-table">
+        <thead>
+        <tr>
+            <th><input data-check="option" type="checkbox" data-checkBtn></th>
+            <th>ID</th>
+            <th>登录名</th>
+            <th>状态</th>
+            <th>操作</th>
+        </thead>
+        <tbody>
+        <?php for($i=0; $i<count($result); $i++) { ?>
+            <tr id="content">
+                <td><input name="check[]" data-check="option" type="checkbox" value="{$result[$i][id]}"></td>
+                <td>{$result[$i][id]}</td>
+                <td>{$result[$i][username]}</td>
+                <td class="td-status">
+                    <!-- 状态颜色操作 -->
+                    <?php $result[$i][state]=='0' ? $bgState='layui-btn-warm': $bgState=''; ?>
+                    <span class="layui-btn layui-btn-normal layui-btn-mini {$bgState}">
+                        <!-- 状态显示操作 -->
+                        <?php if($result[$i][state]=='1') {echo'已启用';}else{echo '已禁用';} ?>
+                    </span>
+                </td>
+                <td class="td-manage">
+                    <a id="edit" class="send" title="编辑" onclick="show(this)" href="javascript:void(0)" data-btn="edit" data-user="{$result[$i][id]}" data-pagehref="{$edit_admin_page_href}" data-username="{$result[$i][username]}">
+                        <i class="layui-icon">&#xe642;</i>
+                    </a>
+                    <a id="disable" title="禁用" onclick="disable(this)" href="javascript:void(0)" data-user="{$result[$i][id]}" data-pagehref="{$disable_admin_href}" data-username="{$result[$i][username]}">
+                        <i class="layui-icon">&#x1006;</i>
+                    </a>
+                    <a title="删除" onclick="del(this)" href="javascript:void(0)" data-btn="delete" data-user="{$result[$i][id]}" data-pagehref="{$disable_admin_href}" data-username="{$result[$i][username]}">
+                        <i class="layui-icon">&#xe640;</i>
+                    </a>
+                </td>
+            </tr>
+        <?php }?>
+        </tbody>
+    </table>
+    <div class="page">
+        <div>
+            <a class="prev" href="">&lt;&lt;</a>
+            <a class="num" href="">1</a>
+            <span class="current">2</span>
+            <a class="num" href="">3</a>
+            <a class="num" href="">489</a>
+            <a class="next" href="">&gt;&gt;</a>
+        </div>
+    </div>
+
+</div>
+
+<!-- Jquery Library -->
+<script src="__PUBLIC__/script/jquery.min.js"></script>
+<script>
+    function show(who) {
+        var obj = $(who),
+            user = obj.attr('data-user'),
+            username = obj.attr('data-username'),
+            href = obj.attr('data-pagehref')+'?id='+user;
+        x_admin_show('编辑&nbsp;'+ username,href,600,350);
+    }
+
+    // 禁用用户
+    function disable(who) {
+        var obj = $(who),
+            user = obj.attr('data-user'),
+            username = obj.attr('data-username'),
+            href = obj.attr('data-pagehref')+'?id='+user;
+        // 显示对话框，名称和跳转地址为json动态添加的内容，
+        layer.confirm('禁用&nbsp;'+ username, function () {
+            $.post(href, {
+                    data: {
+                        id: user,
+                        username : username
+                }
+            },function (res) {
+                layer.msg(res,function () {
+                    window.location.reload();
+                });
+            });
+        });
+    }
+
+    // 删除用户
+    function del(who) {
+        var obj = $(who),
+            user = obj.attr('data-user'),
+            username = obj.attr('data-username'),
+            href = obj.attr('data-pagehref')+'?id='+user,
+            modality = obj.attr('data-btn');
+        layer.confirm('删除&nbsp;'+ username, function () {
+            $.post(href, {
+                data: {
+                    id: user,
+                    modality: modality,
+                    username : username
+                }
+            },function (res) {
+                layer.msg(res,function () {
+                    window.location.reload();
+                });
+            });
+        });
+    }
+</script>
+<!-- LayUI Library -->
+<script src="__PUBLIC__/lib/layui/layui.js"></script>
+<!-- Xadmin JS -->
+<script src="__PUBLIC__/script/xadmin.js"></script>
+<!-- Public Library -->
+<script src="__PUBLIC__/script/public.js"></script>
+<script src="__PUBLIC__/script/plugin.js"></script>
+<script>
+    (function () {
+        layui.use('layer',function () {
+            var layer = layui.layer;
+        });
+        // 定义操作项：
+        var tablePanel = $(".x-body"),
+            delAllBtn = tablePanel.find("[data-btn='deleteAll']");
+
+        delAllBtn.click(function () {
+            var items = checkedArr("input[data-check]");
+            var modality = $(this).data('btn'),
+                action = $(this).data('action');
+
+            layer.confirm("确认删除",function () {
+                var data = {
+                    'modality': modality,
+                    'items': items
+                };
+                $.post(action,{data:data},function (res) {
+                    layer.msg(res, function () {
+                        window.location.reload();
+                    });
+                });
+            });
+        });
+    })();
+</script>
+</body>
+</html>
