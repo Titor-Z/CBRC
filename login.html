@@ -1,0 +1,62 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>医生登陆</title>
+    <link rel="stylesheet" href="src/css/bootstrap.min.css">
+    <style>
+        .custom-control label::selection{
+            background: none;
+        }
+        .logo {
+            margin-top: 10rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .logo img {
+            width: 8rem;
+            height: 8rem;
+            text-align: center;
+        }
+        .center-block {
+            -webkit-border-radius: 8px;
+            -moz-border-radius: 8px;
+            border-radius: 8px;
+            box-shadow: 0 0 8px 1px #e0e0e2;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <picture class="col-12 logo">
+            <img src="src/img/logo.jpg" alt="logo">
+        </picture>
+    </div>
+    <div class="row">
+        <form class="offset-4 border col-4 p-5 center-block" action="www.baidu.com" method="post">
+            <h1 class="h4 text-center mb-4">医生登陆</h1>
+            <div class="form-group">
+                <label class="sr-only" for="username">登录名</label>
+                <input type="email" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="请输入登录名">
+                <small id="emailHelp" class="form-text text-muted">请使用已经注册的手机号码或邮箱账号进行登陆</small>
+            </div>
+            <div class="form-group">
+                <label class="sr-only" for="password">密码</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码">
+            </div>
+            <div class="form-group custom-control custom-checkbox" style="">
+                <input type="checkbox" class="custom-control-input" id="customCheck1">
+                <label class="custom-control-label" for="customCheck1">3天内免登陆</label>
+            </div>
+            <button class="btn btn-primary" type="button" name="submit">登陆</button>
+        </form>
+    </div>
+</div>
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="src/js/login.js"></script>
+</body>
+</html>
