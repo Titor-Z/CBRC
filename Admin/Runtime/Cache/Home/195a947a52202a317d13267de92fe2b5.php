@@ -65,6 +65,7 @@
             <th>手机</th>
             <th>地址</th>
             <th>填表人和捐献者关系</th>
+            <th>转诊医生</th>
             <th>其他留言</th>
             <th>操作</th>
         </tr>
@@ -76,14 +77,16 @@
             <td><?php echo ($result[$i][id]); ?></td>
             <td><?php echo ($result[$i][donorname]); ?></td>
             <td><?php echo ($result[$i][donorage]); ?></td>
-            <td><?php echo ($result[$i][donorsex]); ?></td>
+            <td><?php if($result[$i][donorsex]=='0') {echo'女';}else{echo '男';} ?></td>
             <td><?php echo ($result[$i][donorps]); ?></td>
             <td><?php echo ($result[$i][donormh]); ?></td>
             <td><?php echo ($result[$i][contactname]); ?></td>
             <td><?php echo ($result[$i][contacttel]); ?></td>
             <td><?php echo ($result[$i][contactphone]); ?></td>
             <td><?php echo ($result[$i][contactaddress]); ?></td>
-            <td><?php if($result[$i][contactcadr]=='0') {echo'本人';}else if($result[$i][contactcadr]=='1'){echo '亲属';}else if($result[$i][contactcadr]=='2'){echo '其他';} ?></td>
+            <td><?php if($result[$i][cadr]=='0') {echo'本人';}else if($result[$i][cadr]=='1'){echo '亲属';}else if($result[$i][cadr]=='2'){echo '其他';} ?></td>
+            <!--<td><?php echo ($result[$i][doctor]); ?></td>-->
+            <td><?php echo ($result[$i][username]]); ?></td>
             <td><?php echo ($result[$i][contactothermessage]); ?></td>
             <td class="td-manage">
                 <a title="编辑"  onclick="show(this)" href="javascript:void(0)" data-btn="edit" data-user="<?php echo ($result[$i][id]); ?>" data-pagehref="<?php echo ($edit_user_page_href); ?>" data-username="<?php echo ($result[$i][username]); ?>">

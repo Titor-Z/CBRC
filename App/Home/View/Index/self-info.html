@@ -10,6 +10,36 @@
 </head>
 <body>
 <div class="container-fluid no-gutters">
+    <?php if(cookie('doctor') !==null){ ?>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <a class="navbar-brand" href="/">眼库</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+            </ul>
+            <ul class="navbar-nav justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="javascript:void(0)">欢迎你：</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <?php echo cookie('doctor')[name] ?>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right bg-light" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">个人信息</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" id="logout" href="javascript:void(0)" data-target="{$logout_target}">退出</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <?php }?>
+
     <form>
         <fieldset class="mt-5 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-6 col-sm-8 offset-sm-2">
             <legend class="h4 text-center text-danger">{$form_title}</legend>
@@ -71,6 +101,12 @@
 
 <!-- JQuery Library -->
 <script src="__PUBLIC__/script/jquery.min.js"></script>
+<!-- Bootstrap Library -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<!-- Layui Library -->
+<script src="__PUBLIC__/lib/layui/layui.js"></script>
+<!-- Public JS -->
+<script src="__PUBLIC__/script/public.js"></script>
 <!-- Donor Js -->
 <script src="__PUBLIC__/script/donor.js"></script>
 </body>

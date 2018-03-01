@@ -11,12 +11,50 @@
 <body>
 
 <div class="container-fluid no-gutters">
+    <?php if(cookie('doctor') !==null){ ?>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <a class="navbar-brand" href="/">眼库</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <!--<li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Disabled</a>
+                </li>-->
+            </ul>
+            <ul class="navbar-nav justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="javascript:void(0)">欢迎你：</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <?php echo cookie('doctor')[name] ?>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">个人信息</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" id="logout" href="javascript:void(0)" data-target="{$logout_target}">退出</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <?php }?>
     <form>
+        <input id="table" type="hidden" value="<?php echo $table ?>">
         <fieldset class="mt-5 col-xl-6 offset-xl-3 col-lg-6 offset-lg-3 col-md-6 offset-md-3 col-sm-8 offset-sm-2">
             <legend class="h4 mb-lg-5 text-center text-danger">联系人信息</legend>
             <!-- Contacts Name Start. -->
             <div class="form-group form-row">
-                <label class="col-6 col-xl-2 col-form-label" for="contactName">姓名</label>
+                <label class="col-6 col-xl-2 col-form-label" for="contactName"><i class="text-danger">*</i>&nbsp;姓名</label>
                 <div class="col-12 col-xl-9">
                     <input class="form-control" id="contactName" name="contactName" type="text"
                            placeholder="请输入联系人姓名" maxlength="6" required>
@@ -25,7 +63,7 @@
             </div> <!-- Contacts Name End. -->
             <!-- Contacts Telephone Start. -->
             <div class="form-group form-row">
-                <label class="col-6 col-xl-2 col-form-label" for="contactTel">电话</label>
+                <label class="col-6 col-xl-2 col-form-label" for="contactTel"><i class="text-danger">*</i>&nbsp;电话</label>
                 <div class="col-xl-9">
                     <input class="form-control" id="contactTel" name="contactTel" type="tel" minlength="11"
                            placeholder="请输入联系人电话">
@@ -43,7 +81,7 @@
             </div> <!-- Contacts Mobile Phone End. -->
             <!-- Contacts Address Start. -->
             <div class="form-group form-row">
-                <label class="col-6 col-xl-2 col-form-label" for="contactAddress">地址</label>
+                <label class="col-6 col-xl-2 col-form-label" for="contactAddress"><i class="text-danger">*</i>&nbsp;地址</label>
                 <div class="col-xl-9">
                     <textarea class="form-control" name="contactAddress" id="contactAddress" cols="30" rows="3"
                               placeholder="请输入联系人地址" required></textarea>
@@ -68,6 +106,17 @@
                     </div>
                 </div>
             </div> <!-- Contacts and Donor relationship End. -->
+            <!-- 转诊医生 Start. -->
+            <?php if(cookie('doctor')!==null) {?>
+            <div class="form-group form-row">
+                <label class="col-xl-2 col-form-label">转诊医生</label>
+                <div class="col-xl-9">
+                    <input class="form-control-plaintext" type="text" readonly value="<?php echo cookie('doctor')[name]?>">
+                    <input id="contactDoctor" name="contactDoctor" type="hidden" value="<?php echo cookie('doctor')[id]?>">
+                    <!--<small class="form-text text-muted">这是转诊医生的姓名。</small>-->
+                </div>
+            </div>
+            <?php } ?> <!-- 转诊医生 End. -->
             <!-- Other Leaving A Message Content Start. -->
             <div class="form-group form-row">
                 <label class="col-xl-2 col-form-label" for="contactOtherMessage">其他留言</label>
@@ -77,18 +126,6 @@
                     <small class="form-text text-muted">没有，可以忽略。</small>
                 </div>
             </div> <!-- Other Leaving A Message Content End. -->
-
-            <!-- 转诊医生 Start. -->
-            <?php if(cookie('doctor')!==null) {?>
-            <div class="form-group form-row">
-                <label class="col-xl-2 col-form-label" for="contactDoctor">转诊医生</label>
-                <div class="col-xl-9">
-                    <input class="form-control-plaintext" id="contactDoctor" name="contactDoctor" type="text" readonly value="<?php echo cookie('doctor')[name]?>">
-                    <!--<small class="form-text text-muted">这是转诊医生的姓名。</small>-->
-                </div>
-            </div> <!-- 转诊医生 End. -->
-            <?php } ?>
-
             <!-- I Agree Start. -->
             <div class="form-group mt-5">
                 <div class="custom-control custom-checkbox offset-xl-2">
@@ -105,7 +142,11 @@
 </div>
 <!-- JQuery Library -->
 <script src="__PUBLIC__/script/jquery.min.js"></script>
-<!-- Contact Js -->
+<!-- Bootstrap Library -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<!-- Public Js -->
+<script src="__PUBLIC__/script/public.js"></script>
+<!-- Contact JS -->
 <script src="__PUBLIC__/script/contact.js"></script>
 </body>
 </html>

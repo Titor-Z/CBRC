@@ -10,6 +10,43 @@
 <body>
 
 <div class="container-fluid">
+    <?php if(cookie('doctor') !==null){ ?>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <a class="navbar-brand" href="/">眼库</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <!--<li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Disabled</a>
+                </li>-->
+            </ul>
+            <ul class="navbar-nav justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="javascript:void(0)">欢迎你：</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <?php echo cookie('doctor')[name] ?>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">个人信息</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" id="logout" href="javascript:void(0)" data-target="{$logout_target}">退出</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <?php }?>
     <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4 pt-lg-5">
         <h1 class="h4 mt-5 mb-4 text-center text-danger">用户必读</h1>
         <p class="mt-5 pl-3 pr-3 text-center">无偿志愿捐献角膜的爱心人士，可填写以下详细信息。我们将在24小时

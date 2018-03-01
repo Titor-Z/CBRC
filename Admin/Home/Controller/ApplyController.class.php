@@ -9,8 +9,10 @@ class ApplyController extends Controller {
     # ########################### index（入口状态识别 控制器） ############################ #
     public function index()
     {
-        $result = M($this->table)->where("state=1")->select();
-
+        /*$data = "a.id,a.name,a.age,a.sex,a.job,a.marriage,a.ps,a.mh,a.eyeSurgery,a.drugAllergy,a.complication,a.diagnosis,a.contactName,a.contactTel,a.contactPhone,a.contactAddress,a.cadr,a.otherMessage,b.username";
+        $result = M($this->table)->alias('a')->join('LEFT JOIN cl_doctor as b ON a.doctor = b.id')->where("a.state=1")->getField($data);*/
+        $result = M($this->table)->where('state=1')->select();
+//        die(print_r($result));
         $this->assign([
             "href"                  => U("User/show"),
             "result"                => $result,

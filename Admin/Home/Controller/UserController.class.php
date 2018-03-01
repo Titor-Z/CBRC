@@ -6,16 +6,11 @@ class UserController extends Controller {
 
     protected $table = 'donor';
 
-    public function bash()
-    {
-
-    }
-
     # ########################### index（入口状态识别 控制器） ############################ #
     public function index()
     {
-        $result = M($this->table)->where("state=1")->select();
-
+        $result = M($this->table)->alias('as a')->join('LEFT JOIN cl_doctor as b ON a.doctor = b.id')->where("a.state=1")->select();
+        $result['donorSex']=='0' ? $result['donorSex']= '女':  $result['donorSex']= '男' ;
         $this->assign([
             "href"                  => U("User/show"),
             "result"                => $result,

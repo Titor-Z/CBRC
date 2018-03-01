@@ -27,7 +27,8 @@ class IndexController extends Controller {
             'donor_user_href' => U('User/index'),
             'apply_user_href' => U('Apply/index'),
             'admin_list_href' => U('Admin/userListTpl'),
-            'admin_info_href' => U('Admin/userInfoTpl').'?id='.I('session.adminID')
+            'admin_info_href' => U('Admin/userInfoTpl').'?id='.I('session.adminID'),
+            'doctor_list_href'=> U('Doctor/userListTpl'),
         ]);
         $this->display('index');
     }

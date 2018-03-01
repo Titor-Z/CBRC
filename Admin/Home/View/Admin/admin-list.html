@@ -117,6 +117,7 @@
             username = obj.attr('data-username'),
             href = obj.attr('data-pagehref')+'?id='+user;
         // 显示对话框，名称和跳转地址为json动态添加的内容，
+        // console.log(user,username,href);
         layer.confirm('禁用&nbsp;'+ username, function () {
             $.post(href, {
                     data: {

@@ -1121,12 +1121,18 @@
       <DefaultExpression>&apos;1&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="259" parent="231" name="PRIMARY">
+    <column id="259" parent="231" name="doctor">
+      <Position>20</Position>
+      <Comment>转诊医生，为doctor的id外键，默认为空</Comment>
+      <DataType>int(10)|0</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="260" parent="231" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="260" parent="232" name="id">
+    <column id="261" parent="232" name="id">
       <Position>1</Position>
       <Comment>医生id号码</Comment>
       <DataType>int(11)|0</DataType>
@@ -1134,7 +1140,7 @@
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="261" parent="232" name="username">
+    <column id="262" parent="232" name="username">
       <Position>2</Position>
       <Comment>医生姓名</Comment>
       <DataType>varchar(20)|0</DataType>
@@ -1142,14 +1148,14 @@
       <DefaultExpression>&apos;&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="262" parent="232" name="password">
+    <column id="263" parent="232" name="password">
       <Position>3</Position>
       <Comment>医生密码</Comment>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="263" parent="232" name="state">
+    <column id="264" parent="232" name="state">
       <Position>4</Position>
       <Comment>医生状态</Comment>
       <DataType>int(1)|0</DataType>
@@ -1157,12 +1163,12 @@
       <DefaultExpression>&apos;1&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="264" parent="232" name="PRIMARY">
+    <key id="265" parent="232" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="265" parent="233" name="id">
+    <column id="266" parent="233" name="id">
       <Position>1</Position>
       <Comment>id 号码</Comment>
       <DataType>int(11)|0</DataType>
@@ -1170,7 +1176,7 @@
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="266" parent="233" name="donorName">
+    <column id="267" parent="233" name="donorName">
       <Position>2</Position>
       <Comment>捐献者姓名</Comment>
       <DataType>varchar(10)|0</DataType>
@@ -1178,7 +1184,7 @@
       <DefaultExpression>&apos;&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="267" parent="233" name="donorAge">
+    <column id="268" parent="233" name="donorAge">
       <Position>3</Position>
       <Comment>捐献者年龄</Comment>
       <DataType>int(3)|0</DataType>
@@ -1186,7 +1192,7 @@
       <DefaultExpression>&apos;1&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="268" parent="233" name="donorSex">
+    <column id="269" parent="233" name="donorSex">
       <Position>4</Position>
       <Comment>捐献者性别： 1为男性，0为女性，默认为1</Comment>
       <DataType>int(1)|0</DataType>
@@ -1194,7 +1200,7 @@
       <DefaultExpression>&apos;1&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="269" parent="233" name="donorPS">
+    <column id="270" parent="233" name="donorPS">
       <Position>5</Position>
       <Comment>捐献者当前身体状况，默认为良好</Comment>
       <DataType>varchar(255)|0</DataType>
@@ -1202,14 +1208,14 @@
       <DefaultExpression>&apos;良好&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="270" parent="233" name="donorMH">
+    <column id="271" parent="233" name="donorMH">
       <Position>6</Position>
       <Comment>捐献者疾病史，默认为空</Comment>
       <DataType>varchar(255)|0</DataType>
       <DefaultExpression>&apos;&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="271" parent="233" name="contactName">
+    <column id="272" parent="233" name="contactName">
       <Position>7</Position>
       <Comment>联系人姓名</Comment>
       <DataType>varchar(10)|0</DataType>
@@ -1217,42 +1223,42 @@
       <DefaultExpression>&apos;&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="272" parent="233" name="contactTel">
+    <column id="273" parent="233" name="contactTel">
       <Position>8</Position>
       <Comment>联系人电话，默认为空，电话和手机必须有一个填写</Comment>
       <DataType>varchar(11)|0</DataType>
       <DefaultExpression>&apos;&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="273" parent="233" name="contactPhone">
+    <column id="274" parent="233" name="contactPhone">
       <Position>9</Position>
       <Comment>联系人手机，默认为空，当电话未填写时，要填写本项。</Comment>
       <DataType>varchar(11)|0</DataType>
       <DefaultExpression>&apos;&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="274" parent="233" name="contactAddress">
+    <column id="275" parent="233" name="contactAddress">
       <Position>10</Position>
       <Comment>联系地址，默认为空</Comment>
       <DataType>varchar(255)|0</DataType>
       <DefaultExpression>&apos;&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="275" parent="233" name="contactCADR">
+    <column id="276" parent="233" name="cadr">
       <Position>11</Position>
       <Comment>填表人与捐献者关系：0为本人，1为亲属，2为其他。默认为0。</Comment>
       <DataType>int(1)|0</DataType>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="276" parent="233" name="contactOtherMessage">
+    <column id="277" parent="233" name="contactOtherMessage">
       <Position>12</Position>
       <Comment>其他留言信息，默认为空。</Comment>
       <DataType>varchar(255)|0</DataType>
       <DefaultExpression>&apos;&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="277" parent="233" name="state">
+    <column id="278" parent="233" name="state">
       <Position>13</Position>
       <Comment>记录状态：&#xd;
 0、禁用&#xd;
@@ -1263,76 +1269,16 @@
       <DefaultExpression>&apos;1&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="278" parent="233" name="PRIMARY">
+    <column id="279" parent="233" name="doctor">
+      <Position>14</Position>
+      <Comment>转诊医生，对应的是doctor中的id号码，默认为空</Comment>
+      <DataType>int(10)|0</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="280" parent="233" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="279" parent="234" name="号码">
-      <Position>1</Position>
-      <Comment>id 号码</Comment>
-      <DataType>int(11)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="280" parent="234" name="捐献者">
-      <Position>2</Position>
-      <Comment>捐献者姓名</Comment>
-      <DataType>varchar(10)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="281" parent="234" name="年龄">
-      <Position>3</Position>
-      <Comment>捐献者年龄</Comment>
-      <DataType>int(3)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="282" parent="234" name="性别">
-      <Position>4</Position>
-      <Comment>捐献者性别： 1为男性，0为女性，默认为1</Comment>
-      <DataType>int(1)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="283" parent="234" name="身体情况">
-      <Position>5</Position>
-      <Comment>捐献者当前身体状况，默认为良好</Comment>
-      <DataType>varchar(255)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="284" parent="234" name="疾病史">
-      <Position>6</Position>
-      <Comment>捐献者疾病史，默认为空</Comment>
-      <DataType>varchar(255)|0</DataType>
-    </column>
-    <column id="285" parent="234" name="填表人姓名">
-      <Position>7</Position>
-      <Comment>联系人姓名</Comment>
-      <DataType>varchar(10)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="286" parent="234" name="电话">
-      <Position>8</Position>
-      <Comment>联系人电话，默认为空，电话和手机必须有一个填写</Comment>
-      <DataType>varchar(11)|0</DataType>
-    </column>
-    <column id="287" parent="234" name="手机">
-      <Position>9</Position>
-      <Comment>联系人手机，默认为空，当电话未填写时，要填写本项。</Comment>
-      <DataType>varchar(11)|0</DataType>
-    </column>
-    <column id="288" parent="234" name="地址">
-      <Position>10</Position>
-      <Comment>联系地址，默认为空</Comment>
-      <DataType>varchar(255)|0</DataType>
-    </column>
-    <column id="289" parent="234" name="填表人和捐献人关系">
-      <Position>11</Position>
-      <Comment>填表人与捐献者关系：0为本人，1为亲属，2为其他。默认为0。</Comment>
-      <DataType>int(1)|0</DataType>
-    </column>
-    <column id="290" parent="234" name="其他">
-      <Position>12</Position>
-      <Comment>其他留言信息，默认为空。</Comment>
-      <DataType>varchar(255)|0</DataType>
-    </column>
   </database-model>
 </dataSource>

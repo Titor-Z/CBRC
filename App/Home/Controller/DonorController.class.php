@@ -38,7 +38,7 @@ class DonorController extends Controller {
         $data = I("post.data");
         $result = M($this->table)->data($data)->add();
         session('user',$result);
-        $this->ajaxReturn(U('Index/contact?id='.$result));
+        $this->ajaxReturn(U("Index/contact?t=d&id=".$result));
     }
 
 }

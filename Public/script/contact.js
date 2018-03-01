@@ -3,41 +3,6 @@
         button = $('a.btn'),
         recController = button.attr('data-recController');
 
-    required.blur(function () {
-        $(this).each(function () {
-            var tip = $(this).next();
-            if ($(this).val()==''){
-                $(this).addClass('is-invalid');
-                tip.removeClass('text-muted').addClass('text-danger');
-                tip.html('不能为空');
-            }else{
-                $(this).removeClass('is-invalid');
-                tip.removeClass('text-muted').removeClass('text-danger').addClass('text-success');
-                tip.html('完成');
-            }
-        })
-    }); // required Blur End.
-
-    $("#donor").click(function () {
-        var donorName = $('[name=donorName]').val(),
-            donorAge = $('[name=donorAge]').val(),
-            donorSex = $('[name=donorSex]').val(),
-            donorPs = $('[name=donorPS]').val(),
-            donorMH = $('[name=donorMH]').val();
-        var data = {
-            'donorName' : donorName,
-            'donorAge'  : donorAge,
-            'donorSex'  : donorSex,
-            'donorPS'   : donorPs,
-            'donorMH'   : donorMH
-        };
-
-        $.post(recController,{'data': data}, function (result) {
-            console.info(result);
-            window.location.href = result;
-        });
-    }); // Ajax End.
-
     // 电话和手机的切换
     var tel = $('[name=contactTel]'),
         mobile = $('[name=contactMobile]');
@@ -56,6 +21,7 @@
                 .html('完成');
         }
     });
+
     mobile.blur(function () {
         if (tel.val()=='' && mobile.val()=='') {
             $(this).addClass('is-invalid')
@@ -74,21 +40,32 @@
 
     // 保存联系人信息
     $("#contact").click(function () {
-        var contactName = $('[name=contactName]').val(),
-            contactTel = $('[name=contactTel]').val(),
-            contactMobile = $('[name=contactMobile]').val(),
-            contactAddress = $('[name=contactAddress]').val(),
-            contactCADR = $('[name=contactCADR]').val(),
-            contactOtherMessage = $('[name=contactOtherMessage]').val();
+        var name = $('[name=contactName]'),
+            tel = $('[name=contactTel]'),
+            mobile = $('[name=contactMobile]'),
+            address = $('[name=contactAddress]'),
+            cadr = $('[name=contactCADR]:checked').val(),
+            otherMeg = $('[name=contactOtherMessage]'),
+            doctor  = $("#contactDoctor").val(),
+            table   = $("#table").val();
+
         var data = {
-            'contactName'   : contactName,
-            'contactTel'    : contactTel,
-            'contactMobile' : contactMobile,
-            'contactAddress': contactAddress,
-            'contactCADR'   : contactCADR,
-            'contactOtherMessage' : contactOtherMessage
+            contactName   : valSet(name),
+            contactTel    : valSet(tel),
+            cadr   : cadr,
+            contactPhone  : valSet(mobile),
+            contactAddress        : valSet(address),
+            contactOtherMessage   : valSet(otherMeg),
+            doctor: doctor,
+            table : table
         };
 
+        if (nullSet([name,tel,mobile,address])===false){
+            return false;
+        }
+
+        removeArrNull(data);
+        // console.info(data);
         $.post(recController,{'data': data}, function (result) {
             console.info(result);
             window.location.href = result;

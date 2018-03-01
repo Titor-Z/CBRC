@@ -64,6 +64,7 @@ class IndexController extends Controller {
     public function contact()
     {
         $this->assign([
+            'table' => I('get.t'),
             'rec_controller' => U("saveContact")
         ])->display('Index:contact');
     }
@@ -72,7 +73,21 @@ class IndexController extends Controller {
     public function saveContact()
     {
         $data = I("post.data");
-        $result = M('donor')->where('id=%s',I('session.user'))->save($data);
+        switch ($data['table']){
+            case 'a':
+                case "apply":
+                    $table = M("applicant");
+                    break;
+
+            case "d":
+                case "donor":
+                    $table = M("donor");
+                    break;
+        }
+        $result = $table->where("id='%s'",session('user'))->save($data);
+        if ($result===false) {
+            $this->ajaxReturn(U("state?s=error"));
+        }
         $this->ajaxReturn(U("state?s=success"));
     }
 
@@ -81,13 +96,15 @@ class IndexController extends Controller {
         if ($s == 'success') {
             $this->assign([
                 'title' => '申请成功',
-                'info' => '您的申请，我们已经收到<br>我们会尽快联系您。'
+                'info' => '您的申请，我们已经收到<br>我们会尽快联系您。',
+                'target' => U("Index/index"),
             ]);
         }
         else{
             $this->assign([
                 'title' => '申请失败',
-                'info' => '系统错误，请稍后重试。'
+                'info' => '系统错误，请稍后重试。',
+                'target' => U("Apply"),
             ]);
         }
 
